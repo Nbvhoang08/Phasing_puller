@@ -92,7 +92,7 @@ public class Player : MonoBehaviour
     }
     public Vector2 dirPuller()
     { 
-       
+        
         if (ver == 0)
         {
             dir = Vector2.right;

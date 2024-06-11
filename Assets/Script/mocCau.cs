@@ -8,6 +8,7 @@ public class mocCau : MonoBehaviour
 {
     // Start is called before the first frame update
     public Vector2 direction;
+    public Vector2 initialDirection;
     public Player player;
     public bool pulling;
     public Transform starPos;
@@ -15,13 +16,16 @@ public class mocCau : MonoBehaviour
     [SerializeField] private  LayerMask box;
     public bool isRight;
     public bool var = true;
+    public bool ishorizontal;
     public float moveSpeed = 5f;
-
-
+    Quaternion targetRotation = Quaternion.Euler(0, 0, 90);
+    public SpriteRenderer spriteRenderer;
     void Start()
     {
         getdirection = true;
-        
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+
     }
     void OnEnable()
     {
@@ -29,8 +33,11 @@ public class mocCau : MonoBehaviour
     }
     private void Update()
     {
-       
+
         isRight = player.isFacingRight;
+        Debug.Log(transform.rotation);
+        
+
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -41,8 +48,32 @@ public class mocCau : MonoBehaviour
             if (getdirection)
             {
                 getdirOT();
+                if (direction.y != 0)
+                {
+                    ishorizontal = false;
+                    transform.localScale = new Vector3(1,-direction.y,1) ;
+
+                }
+                else
+                {
+
+                    if (isRight)
+                    {
+                        spriteRenderer.flipY = false;
+                        initialDirection = -player.transform.up;
+                    }else
+                    {
+                        initialDirection = player.transform.up;
+                        spriteRenderer.flipY = true;
+                    }
+                    
+                    ishorizontal = true;
+
+                    // Nếu hướng di chuyển theo trục Y, thay đổi góc xoay của transform
+                    transform.rotation = targetRotation;
+                }
             }
-        }
+        } 
         else
         {
             pulling = false;
@@ -57,13 +88,22 @@ public class mocCau : MonoBehaviour
     {
         if (pulling)
         {
-            transform.Translate(direction * 10 * Time.fixedDeltaTime);
+            if(ishorizontal)
+            {
+                transform.Translate(initialDirection * 10 * Time.fixedDeltaTime);
+            }
+            else
+            {
+                transform.Translate(direction * 10 * Time.fixedDeltaTime);
+            }
+            
         }
         else
         {
-            /*transform.Translate(direction * -10 * Time.fixedDeltaTime);*/
             returnSP();
             transform.position= player.transform.position;
+           
+
         }
     }
     void returnSP()
@@ -73,8 +113,9 @@ public class mocCau : MonoBehaviour
         {
             this.transform.position = starPos.position;
             direction = Vector2.zero;
-            getdirection = true; // Cho phép gán lại direction
+            getdirection = true; 
             var = true;
+            transform.rotation = Quaternion.identity;
         }
     }
 
