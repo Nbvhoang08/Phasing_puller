@@ -19,26 +19,28 @@ public class SoundManager : Singleton<SoundManager>
 {
     
     public PlayerSoundData soundData;
-    public AudioSource SfxSource;
+ /*   public AudioSource SfxSource;*/
     public AudioSource MusicSource;
 
     public AudioMixerGroup[] AudioMixerGroups;
     public AudioMixer mixer;
 
-    public Slider sfx;
+    /*public Slider sfx;
     public Slider music;
     public Slider master;
+*/
 
-
-    public void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         MusicSource = gameObject.AddComponent<AudioSource>();
         MusicSource.loop = true;
         MusicSource.outputAudioMixerGroup = AudioMixerGroups[1];
 
-        SfxSource = gameObject.AddComponent<AudioSource>();
+    /*    SfxSource = gameObject.AddComponent<AudioSource>();
         SfxSource.outputAudioMixerGroup = AudioMixerGroups[2];
-        SfxSource.loop = false;
+        SfxSource.loop = false;*/
 
     }
 
@@ -63,21 +65,21 @@ public class SoundManager : Singleton<SoundManager>
             MusicSource.Stop();
         }
     }
-    public void PlayFx(FxID ID)
+   /* public void PlayFx(FxID ID)
     {
         SfxSource.PlayOneShot(soundData.Sfx[(int)ID]);
-    }
+    }*/
 
-    public void PlayFxClicked()
+  /*  public void PlayFxClicked()
     {
         PlayFx(FxID.Click);
-    }
+    }*/
 
-    public void ValueChangeInSlider()
+  /*  public void ValueChangeInSlider()
     {
         mixer.SetFloat("Master", Mathf.Log10(master.value) * 20);
         mixer.SetFloat("Music", Mathf.Log10(music.value) * 20);
         mixer.SetFloat("SFX", Mathf.Log10(sfx.value) * 20);
-    }
+    }*/
 
 }

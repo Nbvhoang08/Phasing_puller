@@ -5,38 +5,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 public class Test_UI : MonoBehaviour
 {
-    private static Test_UI instance;
-
-    public static Test_UI Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<Test_UI>();
-                if (instance == null)
-                {
-                    GameObject go = new GameObject("Test Ui");
-                    instance = go.AddComponent<Test_UI>();
-                }
-            }
-            return instance;
-        }
-    }
-    private void Awake()
-    {
-        // Đảm bảo rằng chỉ có một instance duy nhất của CameraManager
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject); // Giữ nguyên đối tượng này khi chuyển scene
-        }
-        else
-        {
-            Destroy(gameObject); // Đã có instance khác tồn tại, hủy đối tượng này đi
-            return;
-        }
-    }
     private void Start()
     {
         UIManager.Instance.OpenUI<CanvasMainMenu>();

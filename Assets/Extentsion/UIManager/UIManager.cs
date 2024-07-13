@@ -11,8 +11,9 @@ public class UIManager : Singleton<UIManager>
     Dictionary<System.Type, UICanvas> canvasPrefabs = new Dictionary<System.Type, UICanvas>();
     [SerializeField] Transform parent;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         // Load tất cả các đối tượng UICanvas từ thư mục Resources/UI
         UICanvas[] prefabs = Resources.LoadAll<UICanvas>("UI");
 
