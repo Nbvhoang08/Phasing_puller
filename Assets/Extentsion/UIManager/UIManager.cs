@@ -1,5 +1,6 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -66,6 +67,14 @@ public class UIManager : Singleton<UIManager>
         canvas.Open();
         return canvas ;
     }
+    // mo UI co parent khac Canvas-Main
+    public T OpenUI<T>(Transform customParent = null) where T : UICanvas
+    {
+        T canvas = GetUI<T>(customParent);
+        canvas.Setup();
+        canvas.Open();
+        return canvas;
+    }
     //dong canvas sau time
     public void CloseUI<T>(float time) where T : UICanvas
     {
@@ -103,6 +112,36 @@ public class UIManager : Singleton<UIManager>
         }
         return canvasActives[typeof(T)] as T;
     }
+    public T GetUI<T>(Transform customParent = null) where T : UICanvas
+    {
+        if (!IsUILoaded<T>())
+        {
+            T prefab = GetUIPrefab<T>();
+            T canvas = Instantiate(prefab, customParent);
+            canvasActives[typeof(T)] = canvas;
+        }
+        return canvasActives[typeof(T)] as T;
+    }
+
+    public void ActiveUI<T>() where T : UICanvas
+    {
+        if (IsUIOpened<T>()) // Kiểm tra xem UI đã được mở hay chưa
+        {
+            canvasActives[typeof(T)].gameObject.SetActive(true); // Kích hoạt UI nếu đã được mở
+        }
+    }
+
+
+
+
+
+
+    public T CreateNewUI<T>(Transform customParent = null) where T : UICanvas
+    {
+        T prefab = GetUIPrefab<T>();
+        T canvas = Instantiate(prefab, customParent);
+        return canvas;
+    }
     private T GetUIPrefab<T>() where T :UICanvas
     {
         return canvasPrefabs[typeof(T)] as T ;
@@ -118,8 +157,18 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
- 
-
-
-
+    public void QuitGame()
+    {
+    #if UNITY_EDITOR
+        // Trong môi trường phát triển (Unity Editor)
+        EditorApplication.isPlaying = false;
+    #else
+        // Trong ứng dụng đã build
+         Application.Quit();
+    #endif
+    }
 }
+
+
+
+

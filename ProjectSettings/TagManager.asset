@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - obs
   - trap
+  - Map
   layers:
   - Default
   - TransparentFX

@@ -1,15 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UIElements;
 using Slider = UnityEngine.UI.Slider;
 
-public enum MusicID
-{
-    BackGroundMusic,
-    BattleMusic
-}
 
 public enum FxID
 {
@@ -24,11 +19,11 @@ public class SoundManager : Singleton<SoundManager>
 
     public AudioMixerGroup[] AudioMixerGroups;
     public AudioMixer mixer;
-
-    /*public Slider sfx;
+    public int index = 0;
     public Slider music;
-    public Slider master;
-*/
+    /*public Slider sfx;
+    public Slider master;*/
+
 
     protected override void Awake()
     {
@@ -37,8 +32,11 @@ public class SoundManager : Singleton<SoundManager>
         MusicSource = gameObject.AddComponent<AudioSource>();
         MusicSource.loop = true;
         MusicSource.outputAudioMixerGroup = AudioMixerGroups[1];
+        
+        
+      
 
-    /*    SfxSource = gameObject.AddComponent<AudioSource>();
+    /*  SfxSource = gameObject.AddComponent<AudioSource>();
         SfxSource.outputAudioMixerGroup = AudioMixerGroups[2];
         SfxSource.loop = false;*/
 
@@ -46,14 +44,20 @@ public class SoundManager : Singleton<SoundManager>
 
     public void Start()
     {
-        ChangeMusic(MusicID.BackGroundMusic);
+        ChangeMusic();
         PlayMusic(true);
     }
-
-    public void ChangeMusic(MusicID musicID)
+    public void ChangeMusic()
     {
-        MusicSource.clip = soundData.BackGroundMusic[(int)musicID];
+        MusicSource.clip = soundData.BackGroundMusic[index];
     }
+
+    private void Update()
+    {
+        ChangeMusic();
+    }
+
+
     public void PlayMusic(bool play)
     {
         if (play)
@@ -65,21 +69,22 @@ public class SoundManager : Singleton<SoundManager>
             MusicSource.Stop();
         }
     }
-   /* public void PlayFx(FxID ID)
-    {
-        SfxSource.PlayOneShot(soundData.Sfx[(int)ID]);
-    }*/
+    /* public void PlayFx(FxID ID)
+     {
+         SfxSource.PlayOneShot(soundData.Sfx[(int)ID]);
+     }*/
 
-  /*  public void PlayFxClicked()
-    {
-        PlayFx(FxID.Click);
-    }*/
+    /*  public void PlayFxClicked()
+      {
+          PlayFx(FxID.Click);
+      }*/
 
-  /*  public void ValueChangeInSlider()
+    public void ValueChangeInSlider()
     {
-        mixer.SetFloat("Master", Mathf.Log10(master.value) * 20);
         mixer.SetFloat("Music", Mathf.Log10(music.value) * 20);
-        mixer.SetFloat("SFX", Mathf.Log10(sfx.value) * 20);
-    }*/
+    
+        /* mixer.SetFloat("SFX", Mathf.Log10(sfx.value) * 20);*/
+        /* mixer.SetFloat("SFX", Mathf.Log10(sfx.value) * 20);*/
+    }
 
 }

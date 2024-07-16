@@ -15,5 +15,10 @@ MonoBehaviour:
   backGroundMusic:
   - {fileID: 8300000, guid: 766a322db6a807445bb5b786068c7591, type: 3}
   - {fileID: 8300000, guid: 2f41b329e823f75428ae9c447d067a78, type: 3}
+  - {fileID: 8300000, guid: 2d47c360ea99d4940935c37856b146a9, type: 3}
+  - {fileID: 8300000, guid: c8e674f262cfc4e4f8debd89c4e6964a, type: 3}
+  - {fileID: 8300000, guid: d1b82e68f21cfab44924c364b0ca4c42, type: 3}
+  - {fileID: 8300000, guid: aef30ebd9ad6ff14f81fc215710623d1, type: 3}
+  - {fileID: 8300000, guid: d01f1de7b6079694a886decf87fa917a, type: 3}
   sfx: []
   audioMixer: {fileID: 24100000, guid: 484dc78b755fc694d91d8fa4aee662b8, type: 2}

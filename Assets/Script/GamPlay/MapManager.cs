@@ -1,59 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
-public class MapManager : MonoBehaviour
+public class MapManager : Singleton<MapManager>
 {
-    // Instance tĩnh của lớp này
-    private static MapManager _instance;
-
-    // Thuộc tính công khai để truy cập instance
-    public static MapManager Instance
-    {
-        get
-        {
-            // Kiểm tra xem instance đã được tạo chưa
-            if (_instance == null)
-            {
-                // Tìm instance của lớp trong scene
-                _instance = FindObjectOfType<MapManager>();
-
-                // Nếu không tìm thấy, tạo một GameObject mới và gán script
-                if (_instance == null)
-                {
-                    GameObject singletonObject = new GameObject();
-                    _instance = singletonObject.AddComponent<MapManager>();
-                    singletonObject.name = typeof(MapManager).ToString() + " (Singleton)";
-                }
-            }
-
-            return _instance;
-        }
-    }
+   
+    public List<GameObject> Tilemap;
+  
+    public GameObject currentMap;
+ 
 
     // Đảm bảo instance này không bị hủy khi tải scene mới
-    private void Awake()
+    protected override void Awake()
     {
-        if (_instance == null)
+        SetShouldNotDestroyOnLoad(false);
+        base.Awake();
+        if (Tilemap == null || Tilemap.Count == 0)
         {
-            _instance = this;
-            DontDestroyOnLoad(gameObject);
+            GameObject[] tilemapArray = GameObject.FindGameObjectsWithTag("Map");
+            Tilemap = tilemapArray.ToList();
         }
-        else if (_instance != this)
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    // Start is called before the first frame update
-    public List<GameObject> Tilemap;
-    public GameObject currentMap;
-    
-    
-
-    void Start()
-    {
+        UpdateTilemapList();
         for (int i = 0; i < Tilemap.Count; i++)
         {
             if (i == 0)
@@ -66,6 +35,11 @@ public class MapManager : MonoBehaviour
                 Tilemap[i].SetActive(false);
             }
         }
+    }
+    
+    void Start()
+    {
+       
     }
 
     // Update is called once per frame
@@ -86,6 +60,30 @@ public class MapManager : MonoBehaviour
             else
             {
                 Tilemap[i].SetActive(false);
+            }
+        }
+    }
+
+    public void UpdateTilemapList()
+    {
+        Tilemap = new List<GameObject>();
+        foreach (Transform child in GetAllTransformsInHierarchy())
+        {
+            if (child.CompareTag("Map"))
+            {
+                Tilemap.Add(child.gameObject);
+            }
+        }
+    }
+
+    private IEnumerable<Transform> GetAllTransformsInHierarchy()
+    {
+        var rootObjects = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
+        foreach (var rootObject in rootObjects)
+        {
+            foreach (var transform in rootObject.GetComponentsInChildren<Transform>(true))
+            {
+                yield return transform;
             }
         }
     }

@@ -12,7 +12,8 @@ public class Player : MonoBehaviour
     public bool moving;
     [SerializeField] float speed;
     [SerializeField] private float jumpForce;
-    
+    public Animator anim;
+    public String currentAnimName;
     public Vector2 fallDirection = new Vector2(1, -1); // Hướng rơi chéo
     public float fallSpeed = 0.5f; // Tốc độ rơi chéo
     public Transform groundCheck;
@@ -20,7 +21,6 @@ public class Player : MonoBehaviour
     float hor;
     float ver;
     Vector2 dir;
- 
     public bool isFacingRight = true;
     void Start()
     {
@@ -33,15 +33,20 @@ public class Player : MonoBehaviour
         hor = UnityEngine.Input.GetAxisRaw("Horizontal");
         ver = UnityEngine.Input.GetAxisRaw("Vertical");
 
-        if (UnityEngine.Input.GetButtonDown("Jump") && IsGrounded())
+        if (UnityEngine.Input.GetButtonDown("Jump") && IsGrounded()) 
         {
-            rb.velocity = new Vector2(rb.velocity.x,jumpForce);
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+      
+             // nhay khi dang dung tren mat dat    
         }
 
         if (UnityEngine.Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f); // giam  toc khi nhay len 
+            ChangeAnim("Nhay");
+          
         }
+        
         Flip();
        
 
@@ -53,6 +58,7 @@ public class Player : MonoBehaviour
         {
             moving = false;
             rb.velocity = Vector2.zero;
+            ChangeAnim("Nem_ngang");
         }
         else
         {
@@ -60,9 +66,20 @@ public class Player : MonoBehaviour
             if (IsGrounded())
             {
                 rb.velocity = new Vector2(hor * speed, rb.velocity.y);
+              
+                if (hor == 0)
+                {
+                    ChangeAnim("dung_yen");
+                }
+                else
+                {
+                    ChangeAnim("di_bo");
+                } 
             }
-            else
+            else 
             {
+
+            
                 if (hor != 0) // Nếu có di chuyển ngang khi đang rơi
                 {
                     rb.velocity = new Vector2(hor * speed, rb.velocity.y) + fallDirection * fallSpeed;
@@ -71,6 +88,17 @@ public class Player : MonoBehaviour
                 {
                     rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
                 }
+
+                if(rb.velocity.y <= 0)
+                {
+                    ChangeAnim("roi");
+                    Debug.Log("vcn");
+                }
+                else
+                {
+                    ChangeAnim("tren_khong");
+                }
+
             }
         }
     }
@@ -115,5 +143,15 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void ChangeAnim(string animName)
+    {
+        if (currentAnimName != animName)
+        {
+            anim.ResetTrigger(animName);
+            currentAnimName = animName;
+            anim.SetTrigger(animName);
+            Debug.Log(animName);
+        }
+    }
 }
 

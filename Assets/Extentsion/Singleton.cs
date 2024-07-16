@@ -5,6 +5,7 @@ using UnityEngine;
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static T instance;
+    protected bool shouldNotDestroyOnLoad = true;
     public static T Instance
     {
         get
@@ -15,7 +16,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 if (instance == null)
                 {
                     instance = new GameObject(nameof(T)).AddComponent<T>();
-                    /*DontDestroyOnLoad(instance.gameObject);*/
                 }
             }
             return instance;
@@ -27,11 +27,18 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         if (instance == null)
         {
             instance = this as T;
-            DontDestroyOnLoad(gameObject);
+            if (shouldNotDestroyOnLoad)
+            {
+                DontDestroyOnLoad(gameObject);
+            }
         }
         else if (instance != this)
         {
             Destroy(gameObject);
         }
+    }
+    public void SetShouldNotDestroyOnLoad(bool value)
+    {
+        shouldNotDestroyOnLoad = value;
     }
 }

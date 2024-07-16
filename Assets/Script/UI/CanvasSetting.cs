@@ -22,6 +22,6 @@ public class CanvasSetting : UICanvas
     }
     public void CloseButton()
     {
-
+        UIManager.Instance.QuitGame();
     }
 }
