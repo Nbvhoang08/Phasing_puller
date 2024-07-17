@@ -78,8 +78,6 @@ public class Player : MonoBehaviour
             }
             else 
             {
-
-            
                 if (hor != 0) // Nếu có di chuyển ngang khi đang rơi
                 {
                     rb.velocity = new Vector2(hor * speed, rb.velocity.y) + fallDirection * fallSpeed;
