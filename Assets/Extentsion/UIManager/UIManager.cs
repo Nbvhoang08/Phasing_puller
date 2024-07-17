@@ -11,7 +11,7 @@ public class UIManager : Singleton<UIManager>
     Dictionary<System.Type, UICanvas> canvasActives = new Dictionary<System.Type, UICanvas>();
     Dictionary<System.Type, UICanvas> canvasPrefabs = new Dictionary<System.Type, UICanvas>();
     [SerializeField] Transform parent;
-
+    private bool isPaused = false;
     protected override void Awake()
     {
         base.Awake();
@@ -156,6 +156,35 @@ public class UIManager : Singleton<UIManager>
             }
         }
     }
+
+
+    public void PauseGame()
+    {
+        isPaused = !isPaused;
+
+        // Thực hiện hành động tạm dừng game khi pause
+        if (isPaused)
+        {
+            Time.timeScale = 0; // Dừng thời gian của gameplay
+        }
+        else
+        {
+            ResumeGame(); // Hàm để tiếp tục game khi nhấn nút "Resume" hoặc tương tự
+        }
+    }
+
+    public void ResumeGame()
+    {
+        isPaused = false;
+        Time.timeScale = 1; // Khôi phục thời gian bình thường
+
+
+    }
+
+
+
+
+
 
     public void QuitGame()
     {

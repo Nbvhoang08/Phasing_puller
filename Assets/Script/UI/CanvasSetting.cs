@@ -6,19 +6,25 @@ using UnityEngine.EventSystems;
 public class CanvasSetting : UICanvas
 {
     // Start is called before the first frame update
-    [SerializeField] GameObject[] buttons;
-    
 
+ 
   public void MainMenuButton()
   {
+        SenceController.Instance.ChangeScene("Scenes/Menu");
         UIManager.Instance.CloseAll();
         UIManager.Instance.OpenUI<CanvasMainMenu>();
-        SenceController.Instance.ChangeScene("Scenes/Menu");
-  }
+        UIManager.Instance.ResumeGame();
+    }
     public void ResumeButton()
     {
+       
         UIManager.Instance.CloseAll();
+        UIManager.Instance.ResumeGame();
         UIManager.Instance.OpenUI<CanvasGamePlay>();
+        /* UIManager.Instance.CloseUIDirectly<CanvasSetting>();*/
+        
+
+
     }
     public void CloseButton()
     {
