@@ -30,7 +30,7 @@ public class CanvasMainMenu : UICanvas
     public void PlayerButton()
     {
         UIManager.Instance.CloseAll();
-        SceneManager.LoadScene(1);
+        SenceController.Instance.ChangeScene("Scenes/Maps/Game_Play");
         UIManager.Instance.OpenUI<CanvasGamePlay>();
 
     }

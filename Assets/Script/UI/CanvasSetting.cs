@@ -13,7 +13,7 @@ public class CanvasSetting : UICanvas
   {
         UIManager.Instance.CloseAll();
         UIManager.Instance.OpenUI<CanvasMainMenu>();
-        SceneManager.LoadScene(0);
+        SenceController.Instance.ChangeScene("Scenes/Menu");
   }
     public void ResumeButton()
     {

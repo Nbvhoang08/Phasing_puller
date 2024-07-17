@@ -22,6 +22,20 @@ public class Player : MonoBehaviour
     float ver;
     Vector2 dir;
     public bool isFacingRight = true;
+
+    public static Player Instance;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     void Start()
     {
       rb = GetComponent<Rigidbody2D>(); 
