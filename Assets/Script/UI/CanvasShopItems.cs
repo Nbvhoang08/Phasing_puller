@@ -20,11 +20,9 @@ public class CanvasShopItems : UICanvas
             hud.sprite = item.hud;
         }
         bool isUnLockled = Pref.GetBool(PrefConst.PLAYER_PEFIX + shopItemId);
-        Debug.Log(Pref.GetBool(PrefConst.PLAYER_PEFIX + shopItemId));
+   
         if (isUnLockled)
         {
-            
-            Debug.Log("shopItemId "+shopItemId + " currentPlayerid" +Pref.CurPlayerId);
             if (shopItemId == Pref.CurPlayerId)
             {
                

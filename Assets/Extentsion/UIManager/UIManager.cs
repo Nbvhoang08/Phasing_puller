@@ -21,7 +21,6 @@ public class UIManager : Singleton<UIManager>
         // Kiểm tra xem có tải được các đối tượng UI hay không
         if (prefabs.Length == 0)
         {
-            Debug.LogError("Không tải được bất kỳ đối tượng UICanvas nào từ thư mục Resources/UI.");
             return;
         }
 
@@ -31,7 +30,6 @@ public class UIManager : Singleton<UIManager>
             // Kiểm tra xem đối tượng có null hay không
             if (prefabs[i] == null)
             {
-                Debug.LogError($"Đối tượng UICanvas tại vị trí {i} bị null.");
                 continue;
             }
 
@@ -40,23 +38,12 @@ public class UIManager : Singleton<UIManager>
             if (!canvasPrefabs.ContainsKey(prefabs[i].GetType()))
             {
                 canvasPrefabs.Add(prefabs[i].GetType(), prefabs[i]);
-                Debug.Log($"Đã tải và thêm UICanvas: {prefabs[i].name}");
+                
             }
-            else
-            {
-                Debug.LogWarning($"UICanvas với key {prefabs[i].GetType()} đã tồn tại trong dictionary.");
-            }
+          
         }
 
-        // Kiểm tra cuối cùng xem dictionary có được thêm đầy đủ các đối tượng không
-        if (canvasPrefabs.Count == 0)
-        {
-            Debug.LogError("Không có đối tượng UICanvas nào được thêm vào dictionary.");
-        }
-        else
-        {
-            Debug.Log($"Đã thêm tổng cộng {canvasPrefabs.Count} đối tượng UICanvas vào dictionary.");
-        }
+        
     }
 
 

@@ -18,9 +18,7 @@ public class CanvasGamePlay : UICanvas
 
         UIManager.Instance.CloseAll();
         UIManager.Instance.PauseGame();
-        UIManager.Instance.OpenUI<CanvasSetting>();
-       
-        
+        UIManager.Instance.OpenUI<CanvasSetting>(); 
     }
 
     

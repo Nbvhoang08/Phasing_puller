@@ -30,6 +30,7 @@ public class Trap : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))  // Kiểm tra xem đối tượng ra có tag là "Player" không
         {
             collision.gameObject.transform.position = Destination.position;
+            SoundManager.Instance.ActionSound(3);
         }
     }
 }

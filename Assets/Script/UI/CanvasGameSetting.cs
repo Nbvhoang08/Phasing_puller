@@ -18,6 +18,7 @@ public class CanvasGameSetting : UICanvas
 
     public void LeftButton()
     {
+        SoundManager.Instance.PlayFxClicked();
         if (SoundManager.Instance.soundData.BackGroundMusic.Count > 0)
         {
             SoundManager.Instance.index--;
@@ -31,6 +32,7 @@ public class CanvasGameSetting : UICanvas
     }
     public void RightButton()
     {
+        SoundManager.Instance.PlayFxClicked();
         if (SoundManager.Instance.soundData.BackGroundMusic.Count > 0)
         {
             SoundManager.Instance.index++;
@@ -44,6 +46,7 @@ public class CanvasGameSetting : UICanvas
     }
     public void BackButton()
     {
+        SoundManager.Instance.PlayFxClicked();
         UIManager.Instance.OpenUI<CanvasMainMenu>();
         this.gameObject.SetActive(false);   
         

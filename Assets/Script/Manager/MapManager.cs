@@ -37,16 +37,7 @@ public class MapManager : Singleton<MapManager>
         }
     }
     
-    void Start()
-    {
-       
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
     public void changeMap(int index)
     {
@@ -56,6 +47,7 @@ public class MapManager : Singleton<MapManager>
             {
                 Tilemap[index].SetActive(true);
                 currentMap = Tilemap[index];
+                Debug.Log("success");
             }
             else
             {

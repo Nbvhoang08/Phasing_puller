@@ -36,7 +36,6 @@ public class Pref
     public static void UpdateCurPlayerId(int newPlayerId)
     {
         Pref.CurPlayerId = newPlayerId;
-        Debug.Log("CurPlayerId đã được cập nhật thành: " + Pref.CurPlayerId);
     }
 
     public static bool GetBool(string key)

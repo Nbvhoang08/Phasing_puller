@@ -16,16 +16,20 @@ public class mocCau : MonoBehaviour
     [SerializeField] private  LayerMask box;
     public bool isRight;
     public bool var = true;
+    public bool checkobs ;
     public bool ishorizontal;
     public float moveSpeed = 5f;
     Quaternion targetRotation = Quaternion.Euler(0, 0, 90);
     public SpriteRenderer spriteRenderer;
+    private DayCau dayCau;
     void Start()
     {
         getdirection = true;
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-
+        if (!dayCau)
+        {
+            dayCau = transform.parent.GetComponent<DayCau>();
+        }
     }
     void OnEnable()
     {
@@ -35,7 +39,7 @@ public class mocCau : MonoBehaviour
     {
 
         isRight = player.isFacingRight;
-        
+        checkobs = dayCau.checkObs;
 
     }
     // Update is called once per frame
@@ -85,9 +89,11 @@ public class mocCau : MonoBehaviour
 
     void pull()
     {
+        
         if (pulling)
         {
-            if(ishorizontal)
+      
+            if (ishorizontal)
             {
                 transform.Translate(initialDirection * 10 * Time.fixedDeltaTime);
             }
@@ -137,7 +143,11 @@ public class mocCau : MonoBehaviour
         if (col.gameObject.CompareTag("box"))
         {
             var = true;
-            col.gameObject.GetComponent<boxPull>().pulled = true;
+            if (checkobs)
+            {
+                col.gameObject.GetComponent<boxPull>().pulled = true;
+            }
+           
         }
     }
     private void OnTriggerExit2D(Collider2D col)
@@ -149,10 +159,6 @@ public class mocCau : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-       
-    }
 
 
 

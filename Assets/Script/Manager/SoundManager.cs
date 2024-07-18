@@ -14,15 +14,16 @@ public class SoundManager : Singleton<SoundManager>
 {
     
     public PlayerSoundData soundData;
- /*   public AudioSource SfxSource;*/
+    public AudioSource SfxSource;
     public AudioSource MusicSource;
+    public AudioSource PlaySource;
 
     public AudioMixerGroup[] AudioMixerGroups;
     public AudioMixer mixer;
     public int index = 0;
     public Slider music;
-    /*public Slider sfx;
-    public Slider master;*/
+    public Slider sfx;
+    public Slider playSound;
 
 
     protected override void Awake()
@@ -33,12 +34,13 @@ public class SoundManager : Singleton<SoundManager>
         MusicSource.loop = true;
         MusicSource.outputAudioMixerGroup = AudioMixerGroups[1];
         
-        
-      
-
-    /*  SfxSource = gameObject.AddComponent<AudioSource>();
+        SfxSource = gameObject.AddComponent<AudioSource>();
         SfxSource.outputAudioMixerGroup = AudioMixerGroups[2];
-        SfxSource.loop = false;*/
+        SfxSource.loop = false;
+
+        PlaySource = gameObject.AddComponent<AudioSource>();
+        PlaySource.outputAudioMixerGroup = AudioMixerGroups[3];
+        PlaySource.loop = true;
 
     }
 
@@ -46,6 +48,7 @@ public class SoundManager : Singleton<SoundManager>
     {
         ChangeMusic();
         PlayMusic(true);
+        ValueChangeInSlider();
     }
     public void ChangeMusic()
     {
@@ -69,22 +72,31 @@ public class SoundManager : Singleton<SoundManager>
             MusicSource.Stop();
         }
     }
-    /* public void PlayFx(FxID ID)
+     public void PlayFx(FxID ID)
      {
          SfxSource.PlayOneShot(soundData.Sfx[(int)ID]);
-     }*/
+     }
 
-    /*  public void PlayFxClicked()
+      public void PlayFxClicked()
       {
-          PlayFx(FxID.Click);
-      }*/
+            SfxSource.PlayOneShot(soundData.Sfx[0]);
+       }
+
+       public void ActionSound(int idx)
+        {
+            if(idx < soundData.PlaySound.Count && idx >=0) 
+            {
+                PlaySource.PlayOneShot(soundData.PlaySound[idx]);
+            }
+
+        }
+
 
     public void ValueChangeInSlider()
     {
         mixer.SetFloat("Music", Mathf.Log10(music.value) * 20);
-    
-        /* mixer.SetFloat("SFX", Mathf.Log10(sfx.value) * 20);*/
-        /* mixer.SetFloat("SFX", Mathf.Log10(sfx.value) * 20);*/
+        mixer.SetFloat("Play", Mathf.Log10(playSound.value) * 20);
+        mixer.SetFloat("Master", Mathf.Log10(sfx.value) * 20);
     }
 
 }

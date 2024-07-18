@@ -21,7 +21,7 @@ public class CanvasSetting : UICanvas
         UIManager.Instance.CloseAll();
         UIManager.Instance.ResumeGame();
         UIManager.Instance.OpenUI<CanvasGamePlay>();
-        /* UIManager.Instance.CloseUIDirectly<CanvasSetting>();*/
+       
         
 
 

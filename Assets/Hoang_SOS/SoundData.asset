@@ -20,5 +20,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d1b82e68f21cfab44924c364b0ca4c42, type: 3}
   - {fileID: 8300000, guid: aef30ebd9ad6ff14f81fc215710623d1, type: 3}
   - {fileID: 8300000, guid: d01f1de7b6079694a886decf87fa917a, type: 3}
-  sfx: []
+  sfx:
+  - {fileID: 8300000, guid: a7e69f415b853a542835605e64e4404e, type: 3}
+  playSound:
+  - {fileID: 8300000, guid: bdba4383a8d8c334abd94cd7d08e6ea7, type: 3}
+  - {fileID: 8300000, guid: 8238484cd98e9c04cadf054a471f8617, type: 3}
+  - {fileID: 8300000, guid: e9baf8fb2c0f42642b80e1cfbcf60c58, type: 3}
+  - {fileID: 8300000, guid: 220aa9ebdb4653246bb523a874cd422c, type: 3}
   audioMixer: {fileID: 24100000, guid: 484dc78b755fc694d91d8fa4aee662b8, type: 2}

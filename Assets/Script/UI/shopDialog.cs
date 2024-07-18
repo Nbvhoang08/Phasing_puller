@@ -18,6 +18,7 @@ public class shopDialog : UICanvas
     void ItemEvent(ShopItem item, int shopItemId, CanvasShopItems Pb)
     {
         if (item == null) return;
+        SoundManager.Instance.PlayFxClicked();
         bool isUnLocked = Pref.GetBool(PrefConst.PLAYER_PEFIX + shopItemId);
         if (isUnLocked)
         {
@@ -88,7 +89,7 @@ public class shopDialog : UICanvas
     {
         UIManager.Instance.OpenUI<CanvasMainMenu>();
         UIManager.Instance.CloseUI<shopDialog>(0.1f);
-       
+        SoundManager.Instance.PlayFxClicked();
     }
 
 }

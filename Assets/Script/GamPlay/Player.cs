@@ -49,8 +49,8 @@ public class Player : MonoBehaviour
 
         if (UnityEngine.Input.GetButtonDown("Jump") && IsGrounded()) 
         {
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-      
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            SoundManager.Instance.ActionSound(2);
              // nhay khi dang dung tren mat dat    
         }
 
@@ -73,6 +73,7 @@ public class Player : MonoBehaviour
             moving = false;
             rb.velocity = Vector2.zero;
             ChangeAnim("Nem_ngang");
+/*            SoundManager.Instance.ActionSound(1);*/
         }
         else
         {
@@ -88,6 +89,7 @@ public class Player : MonoBehaviour
                 else
                 {
                     ChangeAnim("di_bo");
+                    /*SoundManager.Instance.ActionSound(0);*/
                 } 
             }
             else 
@@ -104,7 +106,7 @@ public class Player : MonoBehaviour
                 if(rb.velocity.y <= 0)
                 {
                     ChangeAnim("roi");
-                    Debug.Log("vcn");
+                   
                 }
                 else
                 {
@@ -162,7 +164,7 @@ public class Player : MonoBehaviour
             anim.ResetTrigger(animName);
             currentAnimName = animName;
             anim.SetTrigger(animName);
-            Debug.Log(animName);
+          
         }
     }
 }

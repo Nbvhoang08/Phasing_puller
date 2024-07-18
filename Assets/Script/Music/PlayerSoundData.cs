@@ -9,6 +9,7 @@ public class PlayerSoundData : ScriptableObject
  {
         public List<AudioClip> backGroundMusic;
         public List<AudioClip> sfx;
+        public List<AudioClip> playSound;
         public AudioMixer audioMixer;
 
         public List<AudioClip> BackGroundMusic
@@ -22,8 +23,12 @@ public class PlayerSoundData : ScriptableObject
             get => sfx;
             set => sfx = value;
         }
-
-        public AudioMixer AudioMixer
+        public List<AudioClip> PlaySound
+        {
+            get => playSound;
+            set => playSound = value;
+        }   
+    public AudioMixer AudioMixer
         {
             get => audioMixer;
             set => audioMixer = value;

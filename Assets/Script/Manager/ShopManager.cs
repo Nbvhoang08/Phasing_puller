@@ -7,24 +7,18 @@ public class ShopManager : Singleton<ShopManager>
 {
     public ShopItem[] Items;
     Player player;
-    
     protected override void Awake()
     {
         SetShouldNotDestroyOnLoad(false);
         base.Awake();
          
     }
-
-
-
     public void Start()
     {
         ActivePlayer();
         // nếu dưới máy người chơi chưa có dữ liệu coin thì setCoins =1000
         if(!PlayerPrefs.HasKey(PrefConst.COIN_KEY)) 
-            Pref.Coins = 1000;
-        
-        
+            Pref.Coins = 10000;
         if (Items == null || Items.Length <= 0) return;
         for (int i = 0; i < Items.Length; i++)
         {
@@ -55,7 +49,7 @@ public class ShopManager : Singleton<ShopManager>
         }
 
     }
-    public void ActivePlayer()
+    /*public void ActivePlayer()
     {
         if (player)
         {
@@ -64,7 +58,32 @@ public class ShopManager : Singleton<ShopManager>
         var newPlayerPb = Items[Pref.CurPlayerId].playerPb;
         if (newPlayerPb) 
         { 
-            player = Instantiate(newPlayerPb,Vector3.zero,Quaternion.identity);   
+            player = Instantiate(newPlayerPb,Vector3.zero,Quaternion.identity);
+        }
+       
+    }*/
+
+
+    public void ActivePlayer()
+    {
+        StartCoroutine(InstantiateNewPlayer());
+    }
+
+    private IEnumerator InstantiateNewPlayer()
+    {
+        // Hủy player hiện tại nếu có
+        if (player != null)
+        {
+            Destroy(player.gameObject);
+        }
+
+        yield return null; // Chờ một frame để đảm bảo player cũ đã được hủy
+
+        // Instantiate player mới nếu có
+        var newPlayerPb = Items[Pref.CurPlayerId].playerPb;
+        if (newPlayerPb)
+        {
+            player = Instantiate(newPlayerPb, Vector3.zero, Quaternion.identity);
         }
     }
 }

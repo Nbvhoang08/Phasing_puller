@@ -15,21 +15,16 @@ public class CanvasMainMenu : UICanvas
         if (gameSettingCanvas != null && gameSettingCanvas.gameObject.activeInHierarchy)
         {
             // Xử lý khi tìm thấy và đối tượng đang hoạt động
-            Debug.Log(" co");
             gameSettingCanvas.gameObject.SetActive(false);
         }
-        else
-        {
-            // Xử lý khi không tìm thấy hoặc đối tượng không hoạt động
-            Debug.Log(" ko");
-           
-        }
+      
         
     }
 
     public void PlayerButton()
     {
         UIManager.Instance.CloseAll();
+        SoundManager.Instance.PlayFxClicked();
         SenceController.Instance.ChangeScene("Scenes/Maps/Game_Play");
         UIManager.Instance.OpenUI<CanvasGamePlay>();
 
@@ -38,6 +33,7 @@ public class CanvasMainMenu : UICanvas
     {
         if (gameSettingCanvas)
         {
+            SoundManager.Instance.PlayFxClicked();
             gameSettingCanvas.gameObject.SetActive(true);
             UIManager.Instance.CloseUIDirectly<CanvasMainMenu>();
         }
@@ -49,10 +45,12 @@ public class CanvasMainMenu : UICanvas
     }
     public void ExitButton()
     {
+        SoundManager.Instance.PlayFxClicked();
         UIManager.Instance.QuitGame();
     }
     public void StoreBtn()
     {
+        SoundManager.Instance.PlayFxClicked();
         UIManager.Instance.OpenUI<shopDialog>();
         UIManager.Instance.CloseUIDirectly<CanvasMainMenu>();
     }
