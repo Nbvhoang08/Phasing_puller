@@ -148,6 +148,20 @@ public class Player : MonoBehaviour
 
         return dir;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("coins"))
+        {
+            collision.gameObject.SetActive(false);
+            Pref.Coins += 10;
+        }
+    }
+
+
+
+
+
     private void OnDrawGizmosSelected()
     {
         if (groundCheck != null)
