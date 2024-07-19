@@ -18,7 +18,7 @@ public class ShopManager : Singleton<ShopManager>
         ActivePlayer();
         // nếu dưới máy người chơi chưa có dữ liệu coin thì setCoins =1000
         if(!PlayerPrefs.HasKey(PrefConst.COIN_KEY)) 
-            Pref.Coins = 10000;
+            Pref.Coins = 1000;
         if (Items == null || Items.Length <= 0) return;
         for (int i = 0; i < Items.Length; i++)
         {

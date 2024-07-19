@@ -38,8 +38,8 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
-      rb = GetComponent<Rigidbody2D>(); 
-  
+      rb = GetComponent<Rigidbody2D>();
+        jumpForce = 10;
       
     }
     private void Update()
@@ -151,7 +151,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("coins"))
+        if (collision.CompareTag("Coins"))
         {
             collision.gameObject.SetActive(false);
             Pref.Coins += 10;

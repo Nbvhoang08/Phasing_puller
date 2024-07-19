@@ -45,7 +45,7 @@ public class mocCau : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (UnityEngine.Input.GetKey(KeyCode.X)&& var)
+        if (UnityEngine.Input.GetKey(KeyCode.X) && var)
         {
             pulling = true;
             if (getdirection)
@@ -143,10 +143,8 @@ public class mocCau : MonoBehaviour
         if (col.gameObject.CompareTag("box"))
         {
             var = true;
-            if (checkobs)
-            {
-                col.gameObject.GetComponent<boxPull>().pulled = true;
-            }
+            col.gameObject.GetComponent<boxPull>().pulled = true;
+            
            
         }
     }

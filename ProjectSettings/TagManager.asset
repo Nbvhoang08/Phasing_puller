@@ -11,6 +11,8 @@ TagManager:
   - trap
   - Map
   - SpawnPoint
+  - Coins
+  - Line
   layers:
   - Default
   - TransparentFX

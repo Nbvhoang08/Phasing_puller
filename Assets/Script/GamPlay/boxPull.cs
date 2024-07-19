@@ -33,22 +33,26 @@ public class boxPull : MonoBehaviour
         if (col.gameObject.CompareTag("moc"))
         {
             pulled = true;
-            if(col.gameObject.GetComponent<mocCau>().isRight) {
+            if (col.gameObject.GetComponent<mocCau>().isRight)
+            {
                 dirPull = col.gameObject.GetComponent<mocCau>().direction;
             }
             else
             {
-                dirPull= col.gameObject.GetComponent<mocCau>().direction*-1;
+                dirPull = col.gameObject.GetComponent<mocCau>().direction * -1;
             }
-            
-           
+
+        }
+        else if (col.gameObject.CompareTag("moc") && col.gameObject.CompareTag("Line"))
+        {
+            pulled = false;
         }
        
 
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("obs"))
+        if (collision.gameObject.CompareTag("obs") || collision.gameObject.CompareTag("box"))
         {
             pulled = false;
             rb.bodyType = RigidbodyType2D.Static;
