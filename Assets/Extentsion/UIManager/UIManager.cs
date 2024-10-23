@@ -38,14 +38,11 @@ public class UIManager : Singleton<UIManager>
             if (!canvasPrefabs.ContainsKey(prefabs[i].GetType()))
             {
                 canvasPrefabs.Add(prefabs[i].GetType(), prefabs[i]);
-                
+
             }
-          
-        }
 
-        
+        }   
     }
-
 
     public T OpenUI<T>() where T : UICanvas
     {

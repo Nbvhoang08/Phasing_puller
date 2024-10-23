@@ -49,19 +49,7 @@ public class ShopManager : Singleton<ShopManager>
         }
 
     }
-    /*public void ActivePlayer()
-    {
-        if (player)
-        {
-            Destroy(player.gameObject);
-        }
-        var newPlayerPb = Items[Pref.CurPlayerId].playerPb;
-        if (newPlayerPb) 
-        { 
-            player = Instantiate(newPlayerPb,Vector3.zero,Quaternion.identity);
-        }
-       
-    }*/
+ 
 
 
     public void ActivePlayer()

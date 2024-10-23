@@ -21,15 +21,12 @@ public class mocCau : MonoBehaviour
     public float moveSpeed = 5f;
     Quaternion targetRotation = Quaternion.Euler(0, 0, 90);
     public SpriteRenderer spriteRenderer;
-    private DayCau dayCau;
+  
     void Start()
     {
         getdirection = true;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        if (!dayCau)
-        {
-            dayCau = transform.parent.GetComponent<DayCau>();
-        }
+        
     }
     void OnEnable()
     {
@@ -39,7 +36,7 @@ public class mocCau : MonoBehaviour
     {
 
         isRight = player.isFacingRight;
-        checkobs = dayCau.checkObs;
+      
 
     }
     // Update is called once per frame
@@ -53,8 +50,17 @@ public class mocCau : MonoBehaviour
                 getdirOT();
                 if (direction.y != 0)
                 {
-                    ishorizontal = false;
-                    transform.localScale = new Vector3(1,-direction.y,1) ;
+                    if (isRight)
+                    {
+                        ishorizontal = false;
+                        transform.localScale = new Vector3(1, -direction.y, 1);
+                    }
+                    else
+                    {
+                        ishorizontal = false;
+                        transform.localScale = new Vector3(1, direction.y, 1);
+                    }
+                     
 
                 }
                 else
@@ -120,7 +126,9 @@ public class mocCau : MonoBehaviour
             direction = Vector2.zero;
             getdirection = true; 
             var = true;
+            transform.localScale = Vector3.one;
             transform.rotation = Quaternion.identity;
+            initialDirection = Vector2.zero;
         }
     }
 

@@ -1448,7 +1448,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play Volume
+  m_text: SFX Volume
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9cd4b5e4351bd0b41a9dcf2fdb5ad17d, type: 2}
   m_sharedMaterial: {fileID: -1314193959129219925, guid: 9cd4b5e4351bd0b41a9dcf2fdb5ad17d, type: 2}
@@ -2539,6 +2539,10 @@ PrefabInstance:
     - target: {fileID: 6743964262632327183, guid: 8a1cd552027d1cf4496f367c9962247c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8892528252061394821, guid: 8a1cd552027d1cf4496f367c9962247c, type: 3}
+      propertyPath: m_text
+      value: Master Volume
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
