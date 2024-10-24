@@ -34,6 +34,7 @@ public class Move : MonoBehaviour
 
     void  Update()
     {
+     
         // Xử lý input nhảy
         if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) && !_isJumping)
         {
@@ -171,6 +172,14 @@ public class Move : MonoBehaviour
 
         transform.rotation = endRotation;
         _spinDirection *= -1; // Đảo hướng xoay
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            Debug.Log(collision.name);
+        }
     }
 
     void OnDrawGizmos()
