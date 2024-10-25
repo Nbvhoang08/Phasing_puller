@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.WSA;
+using static TreeEditor.TextureAtlas;
 
 public class Trail : MonoBehaviour
 {
@@ -146,6 +148,7 @@ public class Trail : MonoBehaviour
         _currentLine.endWidth = lineWidth;
         _currentLine.positionCount = 0;
         _currentLine.useWorldSpace = true;
+        _currentLine.textureMode = LineTextureMode.Tile; ;
 
         _currentPoints = 0;
     }
